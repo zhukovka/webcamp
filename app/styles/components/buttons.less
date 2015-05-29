@@ -1,0 +1,146 @@
+.btn-teal{
+	.button(@teal, @dark-teal, white);
+}
+.btn-yellow{
+	.button(@yellow, @dark-yellow, white);
+	font-size: 110%;
+}
+.btn-white{
+	.button(white, darken(white, 10%), @teal);
+}
+
+.icon{
+    .icons(@teal, @dark-teal);
+}
+
+.icon-lg-teal{
+  .icons(@teal, @dark-teal, 95px, 95px);
+  //   &.fa-graduation-cap{
+		// &:before{
+		// 	left: 0;
+		// 	top: 15%;
+		// }
+	// }
+}
+
+.icon-sm-teal{
+  .icons(@teal, @dark-teal, 50px, 50px);
+}
+.icon-xs-teal{
+  .icons(@teal, @dark-teal, 40px, 40px);
+  // &.fa-mobile{
+  // 	&:before{
+		// 	left: 22%;
+		// 	top: 0;
+		// }
+  // }
+  // &.fa-skype{
+  // 	&:before{
+		// 	left: 15%;
+		// 	top: 22%;
+		// }
+  // }
+  // &.fa-envelope-o{
+  // 	&:before{
+		// 	left: 12%;
+		// 	top: 20%;
+		// }
+  // }
+  // &.fa-map-marker{
+  // 	&:before{
+	 //  	left:28%;
+	 //  	top:22%;
+  // 	}
+  // }
+}
+.icon-xs-yellow{
+  .icons(@yellow, @dark-yellow, 40px, 40px);
+ //  &.fa-question{
+	// 	&:before{
+	// 		left: 17%;
+	// 		top: 10%;
+	// 	}
+	// }
+}
+@google: #E0463E;
+@dark-google: darken(@google, 10%);
+.icon-xs-fb{
+  .icons(#45619D, darken(#45619D, 10%), 40px, 40px);
+ //  &.fa-facebook{
+	// 	&:before{
+	// 		left: 25%;
+	// 		top: 25%;
+	// 	}
+	// }
+}
+
+.icon-xs-gp, .icon-xs-yt{
+  .icons(@google, @dark-google, 40px, 40px);
+}
+.icon-xs-gp{
+ //  &.fa-google-plus{
+	// 	&:before{
+	// 		left: 18%;
+	// 		top: 25%;
+	// 	}
+	// }
+}
+
+.icon-xs-yt{
+	// &.fa-youtube{
+	// 	&:before{
+	// 		left: 18%;
+	// 		top: 20%;
+	// 	}
+	// }
+}
+
+.prev{
+	i{
+		border-top-right-radius: 0px;
+		border-bottom-right-radius: 0px;
+	}
+}
+.next{
+	i{
+		border-top-left-radius: 0px;
+		border-bottom-left-radius: 0px;
+	}
+}
+.icon-sm-yellow{
+	.icons(@yellow, @dark-yellow, 50px, 50px);
+	// &.fa-question{
+	// 	&:before{
+	// 		left: 17%;
+	// 		top: 10%;
+	// 	}
+	// }
+}
+.action-buttons{
+	display: inline-block;
+	border: 1px solid;
+	border-radius: 4px;
+	padding-right: 20px;
+	margin-top: 10px;
+	cursor: pointer;
+	.icon-sm-yellow, .icon-sm-teal, .icon-xs-yellow, .icon-xs-teal{
+		border: none;
+		border-radius: 0;
+	}
+	i, span{
+		vertical-align: middle;
+	}
+	span{
+		padding-left: 10px;
+	}
+
+	&:hover{
+		background-color: white;
+	}
+}
+.yellow{
+	border-color: @dark-yellow;
+}
+.teal{
+	border-color: @dark-teal;
+}

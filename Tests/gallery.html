@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Gallery Example</title>
+		<style>
+			.office-photos{}
+
+			.office-photos>.gallery{
+				position: relative;
+			}
+			.office-photos>.gallery img{
+				/*position: absolute;
+				left: 0;
+				top:0;*/
+				/*display: none;*/
+			}
+			.gallery{
+				display: none;
+			}
+			.gallery>.close{
+				background-color: red;
+				width: 30px;
+			}
+			.gallery>.photos{
+				display: table;
+				width: 80%;
+				/*height: 100%;*/
+			}
+			.gallery>.photos>div{
+				display: table-cell;
+				vertical-align: middle;
+			}
+			.photo{
+				/*width: 80%;*/
+				/*height: 609px;*/
+				/*position: relative;*/
+			}
+			.photo>img{
+				/*position: absolute;*/
+				width: 100%;
+				height: auto;
+				vertical-align:top;
+				/*top:0;*/
+				/*left: 0;*/
+				/*display: none;*/
+			}
+			.prev, .next{
+				background-color: wheat;
+				/*width: 30px;*/
+			}
+			
+			
+		</style>
+		
+	</head>
+	
+	<body>
+	<div class="office-photos">
+		<img src="office-photo/office-sm-1.JPG" class="img-thumbnail" alt="">
+		<img src="office-photo/office-sm-2.JPG" class="img-thumbnail" alt="">
+		<img src="office-photo/office-sm-3.JPG" class="img-thumbnail" alt="">
+		<img src="office-photo/office-sm-4.JPG" class="img-thumbnail" alt="">
+		<img src="office-photo/office-sm-5.JPG" class="img-thumbnail" alt="">
+
+		<div class="gallery">
+			<div class="close">X</div>
+			<div class="photos">
+				<div class="prev">prev</div>
+				<div class="photo">
+						<img src="office-photo/office-1.JPG" class="img-thumbnail" alt="">
+						<img src="office-photo/office-2.JPG" class="img-thumbnail" alt="">
+						<img src="office-photo/office-3.JPG" class="img-thumbnail" alt="">
+						<img src="office-photo/office-4.JPG" class="img-thumbnail" alt="">
+						<img src="office-photo/office-5.JPG" class="img-thumbnail" alt="">
+				</div>
+				<div class="next">next</div>
+			</div>
+		</div>
+	</div>
+
+		
+
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			// console.log($('.office-photos>img').length);
+			var smallImages = $('.office-photos>img');
+			var largeImages = $('.gallery>.photos>.photo>img');
+			// console.log(largeImages.eq(0));
+			$.each(smallImages, function(index, val) {
+				 /* iterate through array or object */
+				 $(this).on('click', /*'.selector',*/ function(event) {
+					 $('.gallery:hidden').show();
+					 	// event.preventDefault();
+					 	/* Act on the event */
+					 	// console.log($(this), index);
+					 	largeImages.not( ":hidden" ).hide();
+					 	largeImages.eq(index).toggle();
+				 });
+			});
+			
+			$('.gallery>.photos>.next').on('click', function(event) {
+				event.preventDefault();
+				var visible = largeImages.not(":hidden");
+				var visIndex = largeImages.index(visible);
+				/* Act on the event */
+				if((visIndex+1)===largeImages.length){
+					largeImages.eq(0).toggle();
+				}else{
+					largeImages.eq(visIndex+1).toggle();
+				}
+				visible.hide();
+			});
+
+			$('.gallery>.photos>.prev').on('click', function(event) {
+				event.preventDefault();
+				var visible = largeImages.not(":hidden");
+				var visIndex = largeImages.index(visible);
+				/* Act on the event */
+				console.log(visIndex-1);
+				if((visIndex-1) < 0){
+					console.log('less');
+					largeImages.eq(largeImages.length-1).toggle();
+				}else{
+					largeImages.eq(visIndex-1).toggle();
+				}
+				visible.hide();
+			});
+		});
+	</script>
+		
+	</body>
+</html>

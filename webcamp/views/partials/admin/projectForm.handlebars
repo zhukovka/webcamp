@@ -1,0 +1,28 @@
+<form id="project-form" role="form" action="{{_id}}/project" style="display:none;" class="row">
+	<div class="col-sm-6">
+		
+		{{!-- Title --}}
+		  <div class="form-group">
+		    <label for="title">Title</label>
+		    <input type="text" name="title" class="form-control" placeholder="Title">
+		  </div>
+		
+		 {{!-- git --}}
+		  <div class="form-group">
+		    <label for="git">git</label>
+		    <input type="text" name="git" class="form-control" >
+		  </div>
+	</div>
+	<div class="col-sm-6">
+		{{!-- details --}}
+		  <div class="form-group">
+		    <label for="details">Details</label>
+		    <textarea class="form-control" name="details" rows="3"></textarea>
+		  </div>
+	  <button type="submit" class="btn btn-primary">Add</button>
+	  <button name="cancel" class="btn btn-default">Cancel</button>
+		
+	</div>
+	
+
+</form>

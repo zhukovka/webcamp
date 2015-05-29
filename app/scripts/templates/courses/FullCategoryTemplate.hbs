@@ -1,0 +1,18 @@
+<div class="col-sm-11 col-sm-offset-1">
+	<!-- {{title}} -->
+	<article class="row">
+	
+			<div class="col-sm-2 col-sm-offset-1">
+				<div class="course-logo" id="{{title}}">
+					<h2 class="title"><a href="#{{title}}">{{title}}</a></h2>
+				</div>
+			</div>
+			<div class="col-sm-9">
+			{{#with description}}
+					<p><blockquote class="lead darkteal-text">{{this}}</blockquote></p>
+			{{/with}}
+			</div>
+	
+	</article>
+	<article class="row" id="{{title}}-courses"></article>
+</div>

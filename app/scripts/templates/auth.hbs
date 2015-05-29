@@ -1,0 +1,19 @@
+<div class="container">
+	<div class="jumbotron text-center">
+	{{#if user}}
+		<h1>Hello {{user.local.email}}</h1>
+		<a id="logout" href="#" class="btn btn-default"><span class="fa fa-user"></span> Logout</a>
+		<a href="#profile" class="btn btn-default"><span class="fa fa-user"></span> Profile</a>
+
+		{{else}}
+			<h1><span class="fa fa-lock"></span> Node Authentication</h1>
+
+			<p>Login or Register with:</p>
+			<a id="modal-login" href="#" class="btn btn-default"><span class="fa fa-user"></span> Modal Login</a>
+			
+			<a id="login" href="#" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
+			<a id="signup" href="#" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+
+	{{/if}}
+	</div>
+</div>

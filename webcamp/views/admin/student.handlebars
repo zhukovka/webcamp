@@ -1,0 +1,17 @@
+<ul class="list-unstyled">
+	{{#each student}}
+		{{#if (equal @key 'courses')}}
+		{{@key}}:
+			<ul>
+				{{#each this}}
+				<li>
+						<a href="../{{this._id}}">{{this.title}}</a>
+				</li>
+				{{/each}}
+			</ul>
+		{{else}}
+
+			<li>{{@key}}: {{this}}</li>
+		{{/if}}
+	{{/each}}
+</ul>

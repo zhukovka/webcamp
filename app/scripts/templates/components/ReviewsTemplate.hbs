@@ -1,0 +1,19 @@
+<div class="col-xs-3 col-xs-offset-1 text-right">
+	<img src="{{photo}}" alt="..." class="img-thumbnail">
+</div>
+<div class="col-xs-8">
+	<blockquote>
+	{{#times rating}}
+    <span class="glyphicon glyphicon-star yellow-text"></span>
+	{{/times}}
+	{{#if empty}}
+		{{#times this}}
+			<span class="glyphicon glyphicon-star-empty yellow-text"></span>
+		{{/times}}
+	{{/if}}
+	{{#with review_text}}
+	  <p>{{this}}</p>
+	{{/with}}
+	  <footer>{{reviewer.name}}</footer>
+	</blockquote>
+</div>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Webcamp</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> <!-- load fontawesome -->
+        
+        <link rel='stylesheet' type='text/css' href='/scripts/vendor/kwicks/jquery.kwicks.css' />
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="bower_components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+        <script>
+            var map;
+            function addMap() {
+                var myLatlng = new google.maps.LatLng(50.440734, 30.5259335);
+              var mapOptions = {
+                zoom: 16,
+                center: myLatlng,
+                mapTypeControl: false,
+                zoomControl: true,
+                zoomControlOptions: {
+                    style: google.maps.ZoomControlStyle.LARGE,
+                    position: google.maps.ControlPosition.TOP_RIGHT
+                },
+                scrollwheel:false
+              };
+              map = new google.maps.Map(document.getElementById('map-canvas'),
+                  mapOptions);
+              var marker = new google.maps.Marker({
+                  position: myLatlng,
+                  map: map,
+                  title: 'Webcamp - курсы программирования'
+              });
+            }
+
+            // google.maps.event.addDomListener(window, 'load', initialize);
+
+        </script>
+
+        <script>
+
+
+        var csrf = "{{csrf}}"
+        </script>
+        
+    </head>
+<body>
+
+    {{{body}}}
+
+
+</body>
+</html>

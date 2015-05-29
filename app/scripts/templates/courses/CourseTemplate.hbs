@@ -1,0 +1,114 @@
+<article class="row color-row" >
+		
+	<div class="col-xs-6 col-xs-offset-2" data-course="{{title}}">
+	
+		<h2 class="title more">
+			{{#if more}}
+				{{title}}
+				
+				{{else}}
+				<a href="#{{../title}}">{{title}}</a>
+			{{/if}}
+		</h2>
+		<div class="description">
+			{{#each details}}
+			
+			<p>{{this}}</p>
+			{{/each}}
+			
+		</div>
+		<p class="lead">Преподаватель <a href="/#instructors">{{instructor.name}}</a></p>
+
+		<div class="enroll action-buttons teal"><i class="icon-sm-teal fa fa-3x fa-plus"></i> <span class="lead">Записаться</span> 
+		</div>
+
+		{{#unless more}}
+			<div class="more action-buttons yellow"><i class="icon-sm-yellow fa fa-3x fa-question"></i> <span class="lead">Подробнее</span>
+			</div>
+		{{/unless}}
+		
+	</div>
+	<div class="col-xs-4 course-icons">
+		<ul class="list-unstyled">
+			<li class="text-center">
+				<i class="icon fa fa-3x fa-calendar"></i>
+				<p class="text-capitalize">Начало:</p>
+				<p class="lead">
+				{{#each currents.0.start}}
+					
+						{{this}} <br>
+				{{/each}}
+				</p>
+			</li>
+			<li class="text-center">
+				<i class="icon fa fa-3x fa-clock-o"></i>
+				<p class="break">Продолжительность:</p>
+					<p class="lead">{{currents.0.days}} <br>
+					{{currents.0.duration}} недель <br>
+				{{#with currents.0.hours}}
+					с {{this.[0]}} до
+					{{this.[1]}}
+					</p>
+				{{/with}}
+			</li>
+			<li class="text-center">
+				<i class="icon fa fa-3x fa-money"></i>
+				<p>Стоимость:</p>
+				<p class="lead">{{this.price}} грн.</p>
+			</li>
+			
+		</ul>
+	</div>
+</article>
+{{#if more}}
+<article class="row color-row">
+	<div class="col-xs-10 col-xs-offset-2" data-course="{{title}}">
+		<h3 class="title">Программа</h3>
+		<div class="columns-2">
+		{{#each lessons}}
+			<p class="lead darkteal-text">{{this.title}}</p>
+			<p>{{this.description}}</p>
+		{{/each}}
+		</div>
+	</div>
+</article>
+
+{{#with projects}}
+<article class="row color-row">
+	<div class="col-xs-10 col-xs-offset-2" data-course="{{title}}">
+		<h3 class="title">Проекты</h3>
+		
+		<div class="row">
+			{{#each this}}
+		  <div class="col-sm-6 col-md-4">
+		    <div class="thumbnail transparent">
+		      <a href="http://htmlpreview.github.io/?https://github.com/{{this.git}}/blob/master/project/index.html" target="_blank">
+		      	<img class="img-responsive" src="https://raw.githubusercontent.com/{{this.git}}/master/img.png" alt="...">
+
+		      </a>
+		      <div class="caption">
+						<p class="lead darkteal-text">{{this.title}}</p>
+						<p>{{this.details}}</p>
+		        <p>
+		        <a href="http://htmlpreview.github.io/?https://github.com/{{this.git}}/blob/master/project/index.html" target="_blank" class="btn btn-default" role="button">Посмотреть</a></p>
+		      </div>
+		    </div>
+		  </div>
+			{{/each}}
+		</div>{{!-- /row --}}
+	</div>
+</article>{{!-- projects article --}}
+{{/with}}
+
+{{#with playlist}}
+	<article class="row color-row">
+		<div class="col-xs-10 col-xs-offset-2">
+			<h3 class="title">Playlist</h3>
+			<div class="row">
+				<iframe width="80%" height="450" src="//www.youtube.com/embed/videoseries?list={{this}}" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+	</article>
+{{/with}}
+{{/if}}
+	

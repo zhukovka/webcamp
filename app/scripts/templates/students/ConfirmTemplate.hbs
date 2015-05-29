@@ -1,0 +1,26 @@
+<div class="details-container container-fluid">
+	<div class="color-row row">
+		<div class="col-sm-4 col-sm-offset-2">
+			
+			<h1><i class="icon-lg-teal fa fa-2x fa-graduation-cap"></i> <span>Спасибо, {{name}}!</span></h1>
+
+			<p class="lead">
+				Теперь вы среди студентов курса
+				{{#each courses}}
+					{{#if @last}}
+						<a href="#{{title}}"><strong>{{title}}</strong></a>.
+			</p>
+
+						<p class="lead">
+						{{#with currents.[0]}}
+						
+							Ждем вас <span>{{soon}} в {{startDate}} в {{hours.[0]}}</span>.
+						{{/with}}
+						</p>
+					{{/if}}
+				{{/each}}
+
+		</div>
+	</div>
+</div>
+

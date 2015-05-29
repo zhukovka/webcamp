@@ -1,0 +1,15 @@
+<div class="row">
+<div class="col-xs-11 col-xs-offset-1">
+	<form class="form-inline" role="form">
+		<div class="form-group">
+			<label for="categorySelect">Фильтр по карегории</label>
+			<select class="form-control" id="categorySelect" name="categorySelect">
+				<option selected value="all">Все</option>
+				{{#each categories}}
+			  <option>{{this.title}}</option>
+				{{/each}}
+			</select>
+		</div>
+	</form>
+</div>
+</div>

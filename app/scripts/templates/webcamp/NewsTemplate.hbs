@@ -1,0 +1,8 @@
+<p>{{created_time}}</p>
+<p><strong>{{message}}</strong></p>
+{{#with source}}
+	<p><a href="{{this}}">{{this}}</a></p>
+{{/with}}
+{{#with picture}}
+	<img src="{{this}}" class="img-responsive" alt="picture">
+{{/with}}

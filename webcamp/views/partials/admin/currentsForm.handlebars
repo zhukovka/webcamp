@@ -1,0 +1,29 @@
+<form id="currents-form" class="row" role="form" method="POST" action="/admin/{{_id}}" enctype="application/x-www-form-urlencoded" style="display:none;">
+	<input type="hidden" name="_method" value="PUT">
+		<div class="col-sm-6">
+				{{!-- Start --}}
+					  <div class="form-group">
+					    <label for="start">Start</label>
+					    <input type="datetime-local" name="start" class="form-control" id="start" required>
+					  </div>
+					  {{!-- end --}}
+					  <div class="form-group">
+					    <label for="end">End</label>
+					    <input type="datetime-local" name="end" class="form-control" id="end" required>
+					  </div>
+		</div>
+		<div class="col-sm-6">
+			  {{!-- days --}}
+			<div class="form-group">
+			  <label for="days">Days</label>
+			  <input type="text" name="days" class="form-control" id="days" required>
+			</div>
+			{{!-- hours --}}
+			<div class="form-group">
+			  <label for="hours">Hours</label>
+			  <input type="text" name="hours" class="form-control" id="hours" required>
+			</div>
+				  <button type="submit" class="btn btn-primary">Add</button>
+				  <button name="cancel" class="btn btn-default">Cancel</button>
+		</div>
+</form>

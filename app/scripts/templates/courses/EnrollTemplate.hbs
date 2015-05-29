@@ -1,0 +1,41 @@
+<form role="form" id="enroll-form">
+	<div class="enroll-modal-title">
+		<i class="enroll icon-sm-teal fa fa-3x fa-plus"></i>
+		<h2 class="inline-heading">{{course}}</h2>
+	</div>
+	<div id="error"></div>
+  <div class="form-group">
+    <label for="student-name">Имя</label>
+    <div class="input-group">
+    	<input type="text" class="form-control" id="student-name" placeholder="Имя">
+    	<div class="input-group-addon"><i class="fa fa-user"></i></div>
+    </div>
+  </div>
+  <div class="form-group">
+    	<label for="student-phone">Телефон</label>
+    <div class="input-group">
+    	<input type="text" class="form-control" id="student-phone" placeholder="Телефон">
+    	<div class="input-group-addon"><i class="fa fa-phone"></i></div>
+    </div>
+  </div>
+  <div class="form-group">
+	    <label for="student-email">Email</label>
+    <div class="input-group">
+    	<input type="email" class="form-control" id="student-email" placeholder="Enter email">
+    	<div class="input-group-addon">@</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="student-comment">Комментарий</label>
+    <textarea class="form-control" rows="3" id="student-comment">
+    </textarea>
+  </div>
+	
+	<div class="checkbox">
+    <label>
+      <input type="checkbox" id="student-skype"> 
+      <i class="fa fa-lg fa-skype"></i> Skype-студент
+    </label>
+  </div>
+  <button type="submit" class="btn btn-yellow">Записаться</button>
+</form>

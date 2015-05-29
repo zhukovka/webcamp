@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Webcamp</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> <!-- load fontawesome -->
+        <link rel="stylesheet" href="/styles/main.css">
+        <!-- endbuild -->
+        <!-- build:js scripts/vendor/modernizr.js -->
+        <script src="/bower_components/modernizr/modernizr.js"></script>
+        <!-- endbuild -->
+
+
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script>
+        var csrf = "{{csrf}}"
+        </script>
+        
+    </head>
+<body>
+    <div id="wrap">
+        {{> admin/navbar}}
+        <div class="container-fluid">
+            <div class="row">
+              <aside id="sidebar" class="col-sm-3 col-md-2 sidebar">
+                {{!-- <ul class="nav nav-sidebar">
+                    <li class="active"><a href="#">Overview</a></li>
+                    <li><a href="#">Reports</a></li>
+                    <li><a href="#">Analytics</a></li>
+                    <li><a href="#">Export</a></li>
+                </ul> --}}
+              </aside>
+              <section class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                  
+                {{{body}}}
+              </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    $(document).ready(function() {
+        $('button[name="add-button"]').on('click', function(event) {
+            event.preventDefault();
+            /* Act on the event */
+            $(this).next( 'form' ).show();
+            $(this).hide();
+        });
+        $('button[name="cancel"]').on('click', function(event) {
+            event.preventDefault();
+            /* Act on the event */
+            $(this).closest( 'form' ).hide();
+            $('button[name="add-button"]:hidden').show();
+        });
+        $(document).on('click', 'a[name="edit-icon"]', function(event) {
+            event.preventDefault();
+            /* Act on the event */
+            var fields = $(this).parent().find('.edit-field');
+            // $(this).parent().wrap('');
+            $(this).replaceWith('<a href="" data-path="'+ 
+                $(this).attr('data-path') 
+                +'" name="save-icon"><span class="glyphicon glyphicon-ok-circle"></span></a> <a href="" name="cancel-icon"><span class="glyphicon glyphicon-ban-circle"></span></a>');
+            $.each(fields, function(index, val) {
+                 /* iterate through array or object */
+                var name = $( val ).parent().find('.name-field').text().toLowerCase();
+                $( val ).replaceWith( '<input name="'+ name
+                    +'" class="edit-field form-control" type="text" value="'+
+                    $( val ).text()+'">' );
+            });
+        });
+        $(document).on('click', 'a[name="cancel-icon"]', function(event) {
+            event.preventDefault();
+            /* Act on the event */
+            var fields = $(this).parent().find('.edit-field');
+            var endpoint = $(this).attr('data-path');
+            $(this).replaceWith('<a href="" data-path="'+ endpoint
+                +'" name="edit-icon"><span class="glyphicon glyphicon-pencil"></span></a>');
+            $('a[name="save-icon"]').remove();
+            $.each(fields, function(index, val) {
+                 /* iterate through array or object */
+                $( val ).replaceWith( '<span class="edit-field">'+
+                    $( val ).val()+'</span>' );
+            });
+        });
+        $(document).on('click', 'a[name="save-icon"]', function(event) {
+            event.preventDefault();
+            /* Act on the event */
+            var fields = $(this).parent().find('.edit-field');
+            var id = $(this).parent().find('.id-field').text() || "";
+            var form = $(this).closest('form');
+            var request = form.serialize();
+            var endpoint = $(this).attr('data-path');
+            console.log(endpoint);
+            var confirmed = confirm('Are you sure you want to edit this?');
+            if(confirmed){
+                $.ajax({
+                url: '/admin/'+endpoint+'/'+id,
+                type: 'POST',
+                data: request
+                })
+                .done(function(data) {
+                    console.log("success", data);
+
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+            }
+            $(this).replaceWith('<a href="" data-path="'+ endpoint
+                +'" name="edit-icon"><span class="glyphicon glyphicon-pencil"></span></a>');
+            $('a[name="cancel-icon"]').remove();
+            $.each(fields, function(index, val) {
+                 /* iterate through array or object */
+                $( val ).replaceWith( '<span class="edit-field">'+
+                    $( val ).val()+'</span>' );
+            });
+        });
+        $('#sidebar').append($('#to-sidebar'));
+    });
+    </script>
+</body>
+</html>

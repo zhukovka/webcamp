@@ -1,0 +1,54 @@
+<form id="add-form" role="form" method="POST" action="admin/add" style="display:none;" class="row">
+	<div class="col-sm-6">
+		{{!-- Category --}}
+		<div class="form-group">
+			<label for="category">Category</label>
+			<select name="category" class="form-control">
+			{{#each categories}}
+			
+			  <option >{{this.title}}</option>
+			{{/each}}
+			</select>
+		</div>
+		{{!-- Title --}}
+		  <div class="form-group">
+		    <label for="title">Title</label>
+		    <input type="text" name="title" class="form-control" id="title" placeholder="Title">
+		  </div>
+		
+		{{!-- details --}}
+		  <div class="form-group">
+		    <label for="details">Details</label>
+		    <textarea class="form-control" name="details" rows="3"></textarea>
+		  </div>
+		  {{!-- price --}}
+		  <div class="form-group">
+		    <label for="price">Price</label>
+		    <input type="number" min="0" step="100" name="price" class="form-control" id="price" >
+		  </div>
+	</div>
+	<div class="col-sm-6">
+		{{!-- Start --}}
+		  <div class="form-group">
+		    <label for="start">Start</label>
+		    <input type="datetime-local" name="start" class="form-control" id="start">
+		  </div>
+		  {{!-- end --}}
+		  <div class="form-group">
+		    <label for="end">End</label>
+		    <input type="datetime-local" name="end" class="form-control" id="end">
+		  </div>
+		  {{!-- days --}}
+		  <div class="form-group">
+		    <label for="days">Days</label>
+		    <input type="text" name="days" class="form-control" id="days">
+		  </div>
+		  {{!-- hours --}}
+			<div class="form-group">
+		    <label for="hours">Hours</label>
+		    <input type="text" name="hours" class="form-control" id="hours">
+		  </div>
+	  <button type="submit" class="btn btn-primary">Add course</button>
+	</div>
+
+</form>

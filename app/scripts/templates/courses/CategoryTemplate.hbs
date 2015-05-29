@@ -1,0 +1,20 @@
+<!-- {{title}} -->
+<article class="row course">
+	<div class="col-sm-6 col-sm-offset-3">
+		<div id="courses" class="course-list hide-it text-center">
+			
+			{{#each courses}}
+					<h3 class="">
+						<a href="#{{../title}}/{{path this.title}}">{{this.title}}</a>
+					</h3>
+			{{/each}}
+			
+		</div>
+		<div class="course-logo text-center" id="{{title}}">
+			<h1><a href="">{{title}}</a></h1>
+		</div>
+		<div class="add-info hide-it">
+			<p class="lead">{{description}}</p>
+		</div>
+	</div>
+</article>

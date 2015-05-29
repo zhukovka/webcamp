@@ -1,0 +1,10 @@
+// @import "long-shadows";
+
+.title(@color, @size, @spread){
+	border: 2px solid darken(@color, 5%);
+  background-color: @color;
+  border-radius: 5px;
+  text-transform: uppercase;
+  .longShadow(darken(@color, 5%), @size, @spread);
+  overflow: hidden;
+}

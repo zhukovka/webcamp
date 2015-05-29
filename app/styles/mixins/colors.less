@@ -1,0 +1,28 @@
+.generate-colors(@n, @i: 1) when (@i =< @n){
+	li:nth-child(@{i}){
+			@lightness: ( 3% + (@i * 10));
+			@saturation: (90% - ( @i * 10));
+			@color: hsl(180, @saturation, @lightness);
+			background-color: @color;
+	}
+	.generate-colors(@n, (@i + 1));
+};
+
+.generate-colors-list(@n, @list, @i: 1) when ( @i <= @n ){
+	&:nth-child(@{i}){
+		@color: extract(@list, (mod(@i, length(@list)) + 1));
+		background-color: @color;
+		border-bottom: 7px solid darken(@color, 10%);
+	}
+	.generate-colors-list(@n, @list, (@i + 1));
+};
+
+
+// .generate-columns(4);
+
+// .generate-columns(@n, @i: 1) when (@i =< @n) {
+//   .column-@{i} {
+//     width: (@i * 100% / @n);
+//   }
+//   .generate-columns(@n, (@i + 1));
+// }

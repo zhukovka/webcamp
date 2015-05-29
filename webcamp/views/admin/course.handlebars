@@ -1,0 +1,212 @@
+<div class="container">
+	{{#with course}}
+	
+		<h1 id="{{_id}}">{{title}}</h1>
+		<h4>Category: {{category.title}}</h4>
+		<div class="container">
+			<section class="row">
+				<article class="col-sm-8">
+					<p><strong>Details:</strong> </p>
+					<p>{{#each details}}
+					
+					{{this}} <br>
+					{{/each}}
+					</p>
+					<button class="btn btn-default" id="edit-button">Edit</button>
+					
+					<div class="buttons" style="display:none;">
+						<button class="btn btn-default" id="save-button">Save</button>
+						<button class="btn btn-default" id="cancel-button">Cancel</button>
+					</div>
+  				
+  				<p><strong>Price:</strong> {{price}} {{!-- <span class="edit glyphicon glyphicon-pencil"></span> --}}</p>
+  				<form>
+  					<p>
+		  				<strong>
+							<span class="id-field">{{_id}}</span>
+		  				<span class="name-field" style="text-transform: capitalize;">playlist</span>:</strong> 
+		  				<span class="edit-field">{{playlist}}</span>
+		  				<a href="" data-path="playlist" name="edit-icon"><span class="glyphicon glyphicon-pencil"></span></a>
+  											
+  					</p>
+  				</form>
+					<p><strong>Currents: </strong>
+						<ul class="list-unstyled">
+								{{#each currents.[0]}}
+									<li>{{@key}} : {{this}}</li>
+								{{/each}}
+						</ul>
+					</p>
+					{{!-- dates form --}}
+					<button class="btn btn-primary" name="add-button">Add dates</button>
+					{{> admin/currentsForm}}
+					<div class="row pad-top">
+						<p class="lead"><strong>Projects: </strong></p>
+							{{#each projects}}
+								<form>
+									<ul class="list-unstyled" >
+											{{#each this}}
+												{{#if (equal @key '_id') }}
+													<li>{{@key}} : <span class="id-field">{{this}}</span></li>
+												{{else}}
+													<li><span class="name-field">{{@key}}</span> : <span class="edit-field">{{this}}</span></li>
+												{{/if}}
+											{{/each}}
+												<a href="" data-path="project" name="edit-icon"><span class="glyphicon glyphicon-pencil"></span></a>
+												<a href=""><span class="glyphicon glyphicon-remove-circle"></span></a>
+									</ul>
+								</form>
+							{{/each}}
+						<button class="btn btn-primary" name="add-button">Add project</button>
+						{{!-- proj form --}}
+						{{> admin/projectForm}}
+					</div>{{!-- /projects row pad-top --}}
+
+					<div class="row pad-top">
+					<p class="lead"><strong>Lessons:</strong></p>
+						<div class="columns">
+							
+							{{#each lessons}}
+								<p>
+									<a href="lesson/{{this._id}}">{{@index}}. {{this.title}}</a>
+								</p>
+							{{/each}}
+						</div>
+					</div>
+					{{!-- lessons form --}}
+					<button class="btn btn-primary" name="add-button">Add lesson</button>
+					{{> admin/lessonsForm}}
+				</article>
+				<aside class="col-sm-4">
+					<h4>Instructor:</h4>
+					{{#if instructor}}
+					{{!-- {{#each this}} --}}
+					
+						<a href="/admin/instructor/{{instructor._id}}">{{instructor.name}}</a>
+					{{!-- {{/each}} --}}
+					{{else}}
+					{{> admin/instructorForm}}
+					{{/if}}
+
+
+					<h4>Students</h4>
+					<table id="students-table" class="table table-condensed table-striped">
+						<colgroup>
+			        <col class="col-xs-1">
+			        <col class="col-xs-5">
+			        <col class="col-xs-5">
+			        <col class="col-xs-1">
+			      </colgroup>
+			      <thead>
+			        <tr>
+			          <th>#</th>
+			          <th>Name</th>
+			          <th>Phone</th>
+			          <th>Confirmed</th>
+			          <th>Del</th>
+			        </tr>
+			      </thead>
+			      <tbody>
+						{{#each students}}
+			        <tr>
+			          <td>{{@index}}</td>
+			          <td><a href="student/{{this._id}}">{{this.name}}</a></td>
+			          <td>{{this.phone}}</td>
+			          {{#if this.confirmed}}
+			        		<td class="success text-center">
+			        			+
+			        		</td>
+			        		{{else}}
+									<td class="danger text-center">
+			        			-
+									</td>
+			        	{{/if}}
+			        	<td style="text-align:center;"><span id="{{_id}}" class="del glyphicon glyphicon-remove-circle"></span></td>
+			        </tr>
+						{{/each}}
+			      </tbody>
+			    </table>
+				</aside>{{!-- / Students --}}
+			</section>
+
+			
+		</div>
+	{{/with}}
+</div>
+
+<script>
+	$(document).ready(function() {
+		$('span.del').on('click', function(event) {
+			event.preventDefault();
+			/* Act on the event */
+			var self = $(this);
+			var id = this.id;
+			var confirmed = confirm('Are you sure you want to delete this student?');
+			if(confirmed){
+				var request = $.ajax({
+				  url: "student/"+id,
+				  type: "DELETE",
+				  
+				});
+				 
+				request.done(function( msg ) {
+					self.closest('tr').remove();
+				  console.log( "Request done: " + msg );
+				});
+				 
+				request.fail(function( jqXHR, textStatus ) {
+				  console.log( "Request failed: " + textStatus );
+				});
+			}
+		});
+
+		$('#edit-button').on('click', function(event) {
+			// console.log($(this).prev('p'));
+			$(this).prev('p').replaceWith('<textarea name="details" class="form-control" id="details" cols="30" rows="10">'+
+				$(this).prev('p').text()+'</textarea>');
+			$(this).hide();
+			$('.buttons').show();
+		});
+
+		$('#save-button').on('click', function(event) {
+			event.preventDefault();
+			/* Act on the event */
+			var self = $(this);
+			var id = $('h1')[0].id;
+			var confirmed = confirm('Are you sure you want to save this edits?');
+			if(confirmed){
+				var request = $.ajax({
+				  url: "course/"+id,
+				  type: "PUT",
+				  data: { details: $('#details').val().split('\n')}
+				});
+				console.log($('#details').val().split('\n'));
+				request.done(function( msg ) {
+				  console.log( "Request done: " + msg );
+				});
+				 
+				request.fail(function( jqXHR, textStatus ) {
+				  console.log( "Request failed: " + textStatus );
+				});
+			}
+		});
+
+		$('#project-form').on('submit', function(event) {
+			event.preventDefault();
+			/* Act on the event */
+			var url = $( this ).attr('action');
+			console.log( url );
+			$.post( url, $( this ).serialize() )
+			.done(function (data) {
+				console.log(data);
+			})
+			.fail(function( jqXHR, textStatus ) {
+			  console.log( "Request failed: " + textStatus );
+			});
+		});
+
+
+	});/*ready*/
+</script>
+
+

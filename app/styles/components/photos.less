@@ -1,0 +1,43 @@
+.office-photos{
+	&>img{
+		cursor: zoom-in;
+		cursor: -webkit-zoom-in;
+	}
+}
+.gallery{
+				display: none;
+	&>.close-gallery{
+		// background-color: red;
+		// width: 30px;
+		float: right;
+		cursor: pointer;
+	}
+	&>.photos{
+		border: 2px solid @dark-teal;
+		border-radius: 4px;
+		display: table;
+		// width: 80%;
+		/*height: 100%;*/
+		&>div{
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+}
+
+.photo>img{
+	/*position: absolute;*/
+	width: 100%;
+	height: auto;
+	vertical-align:top;
+}
+.prev, .next{
+	background-color: @teal;
+	cursor: pointer;
+	overflow: hidden;
+	.icon{
+		border:none;
+		overflow: visible;
+	}
+}
+

@@ -1,0 +1,56 @@
+<!-- {{title}} -->
+<section class="category container-fluid">
+{{#each courses}}
+	<article class="row color-row" >
+		
+			<div class="col-sm-4 col-sm-offset-2 course-list" data-course="{{this.title}}">
+				<h2 class="more">
+					<a href="#{{../title}}">{{this.title}}</a>
+				</h2>
+				<div class="description">
+					<p>{{this.details}}</p>
+				</div>
+
+				<div class="enroll action-buttons teal"><i class="icon-sm-teal fa fa-3x fa-plus"></i> <span class="lead">Записаться</span> 
+				</div>
+				<div class="more action-buttons yellow"><i class="icon-sm-yellow fa fa-3x fa-question"></i> <span class="lead">Подробнее</span>
+				</div>
+			</div>
+			<div class="col-sm-6 course-icons">
+				<ul class="list-inline">
+					<li class="text-center">
+						<i class="icon fa fa-3x fa-calendar"></i>
+						<p class="text-capitalize">Начало:</p>
+						{{#each this.currents.0.start}}
+							{{#if @first}}
+								<h4 style="text-transform: capitalize">{{this}}</h4>
+							{{else}}
+
+								<h4>{{this}}</h4>
+							{{/if}}
+						{{/each}}
+					</li>
+					<li class="text-center">
+						<i class="icon fa fa-3x fa-clock-o"></i>
+						<p>Продолжительность:</p>
+							<h4>{{this.currents.0.days}}</h4>
+							<h4>{{this.currents.0.duration}} недель</h4>
+						{{#with this.currents.0.hours}}
+							<h4>с {{this.[0]}} до
+							{{this.[1]}}
+							</h4>
+						{{/with}}
+					</li>
+					<li class="text-center">
+						<i class="icon fa fa-3x fa-money"></i>
+						<p>Стоимость:</p>
+						<h4>{{this.price}} грн.</h4>
+					</li>
+					
+				</ul>
+			</div>
+	</article>
+{{/each}}
+
+
+</section>

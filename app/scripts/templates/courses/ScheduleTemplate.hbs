@@ -1,0 +1,46 @@
+
+      <td><a href="#{{category}}/{{path title}}">{{title}}</a></td>
+      <td>
+      {{#with currents.0.start}}
+      
+	      Начало: 
+	      {{#each this}}
+		      {{#unless @last}}
+		      
+				    {{this}}
+		      {{/unless}}
+	      {{/each}}
+      {{/with}}
+      </td>
+      <td>
+      {{#with currents.0.days}}
+      
+	      Дни: {{this}}
+      {{/with}}
+      </td>
+      <td>
+      {{#with currents.0.hours}}
+      
+	      Время: 
+	      {{#each this}}
+	      {{#if @first}}
+	      
+		      с {{this}} до
+		      {{else}}
+			      {{this}}
+	      {{/if}}
+	      {{/each}}
+      {{/with}}
+      </td>
+      <td>
+      {{#with currents.0.duration}}
+      	Длительность: {{this}} недель.
+      {{/with}}
+      </td>
+      <td>
+      {{#with price}}
+      
+      	Цена: {{this}} грн.
+      {{/with}}
+      </td>
+

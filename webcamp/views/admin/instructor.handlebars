@@ -1,0 +1,27 @@
+<form>
+	<ul class="list-unstyled">
+		{{#each instructor}}
+			{{#if (equal @key 'courses')}}
+			{{@key}}:
+				<ul>
+					{{#each this}}
+					<li>
+							<a href="../{{this._id}}">{{this.title}}</a>
+					</li>
+					{{/each}}
+				</ul>
+			{{else}}
+	
+				<li>
+					{{#if (equal @key '_id') }}
+					<strong>{{@key}}</strong> : <span class="id-field">{{this}}</span>
+					{{else}}
+					<strong><span class="name-field" style="text-transform: capitalize;">{{@key}}</span>:</strong> 
+		  				<span class="edit-field">{{this}}</span>
+					{{/if}}
+				</li>
+			{{/if}}
+		{{/each}}
+		<a href="" data-path="instructor" name="edit-icon"><span class="glyphicon glyphicon-pencil"></span></a>
+	</ul>
+</form>

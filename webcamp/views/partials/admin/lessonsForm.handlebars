@@ -1,0 +1,18 @@
+<form id="currents-form" class="row" role="form" method="POST" action="/admin/{{_id}}/lesson" style="display:none;">
+		
+		<div class="col-sm-12">
+			  {{!-- title --}}
+			<div class="form-group">
+			  <label for="title">Title</label>
+			  <input type="text" name="title" class="form-control" required>
+			</div>
+			{{!-- description --}}
+			<div class="form-group">
+			  <label for="description">Description</label>
+			  <textarea name="description" class="form-control" id="description" cols="30" rows="10"></textarea>
+			  
+			</div>
+				  <button type="submit" class="btn btn-primary">Add</button>
+				  <button name="cancel" class="btn btn-default">Cancel</button>
+		</div>
+</form>

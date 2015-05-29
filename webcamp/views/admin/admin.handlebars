@@ -1,0 +1,122 @@
+<ul id="to-sidebar" class="nav nav-sidebar">
+		<li>
+			<h4>Categories:</h4>
+		</li>
+		{{#each categories}}
+	    <li><a href="#{{title}}">{{title}}</a></li>
+		{{/each}}
+</ul>
+<div class="container">
+	{{#each categories}}
+
+
+		<div>
+		<h1 id="{{this.title}}">{{this.title}} <span class="add-course"><a href="">+</a></span></h1>
+		<div>
+			<form>
+				<p>
+					<p><strong class="name-field">Description</strong>:</p>
+					<span class="id-field" style="display:none;">{{this._id}}</span>
+					<span class="edit-field" >{{this.description}}</span>
+					<a href="" data-path="category/description" name="edit-icon"><span class="glyphicon glyphicon-pencil"></span></a>
+				</p>
+			</form>
+		</div>
+		
+		
+
+		</div>
+
+		<table class="table table-hover">
+		  <thead>
+		    <tr>
+		      <th>#</th>
+		      <th>Course Name</th>
+		      <th>Price</th>
+		      <th>Edit</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  {{#each this.courses}}
+		    <tr data-courseId="{{this._id}}">
+		      <td>{{@index}}</td>
+		      <td><a href="admin/{{this._id}}">{{this.title}}</a></td>
+		      <td  class="price">
+		      {{#if this.price}}
+		      	{{this.price}} 
+		      {{else}}
+		      	0
+		      {{/if}}
+		      </td>
+					<td><span  class="edit glyphicon glyphicon-pencil"></span></td>
+		    </tr>
+
+		  {{/each}}
+		  </tbody>
+		</table>
+	{{/each}}
+
+	{{> admin/courseForm}}
+
+	<form method="POST" action="/admin" class="form-inline" role="form">
+	  <div class="form-group">
+	    <input type="text" class="form-control" name="title" id="newCategory" placeholder="New category">
+	  </div>
+	  
+	  <button type="submit" class="btn btn-success">Add category</button>
+	</form>
+</div>
+
+
+<script>
+	$(document).ready(function() {
+		/*$(this).keydown(function(event) {
+			console.log(event.keyCode);
+		});*/
+		$('.add-course').on('click'/*, '.selector'*/, function(event) {
+			event.preventDefault();
+			/* Act on the event */
+			// console.log($(this));
+			$('#add-form').show();
+			window.scrollTo(0, $('#add-form').offset().top);
+		});
+
+		$('span.edit').on('click', function(event) {
+			event.preventDefault();
+			/* Act on the event */
+			var self = $(this);
+			var id = $(this).attr('data-courseId');
+			var price = $(this).parent().prev();
+			price.attr('contenteditable', 'true');
+			price.focus();
+		});
+		$('.price').on('keydown', function(event) {
+			/* Act on the event */
+			event.stopPropagation();
+			var price = $(this);
+			if(event.keyCode == 13 && event.shiftKey){
+				event.preventDefault();
+				price.attr('contenteditable', 'false');
+				var confirmed = confirm('Are you sure you want to edit price?');
+				if(confirmed){
+					var newPrice = price.text().trim();
+					var id = price.parent().attr('data-courseId');
+					console.log(id);
+					var request = $.ajax({
+					  url: "admin/course/"+id,
+					  type: "PUT",
+					  data: { price : newPrice }
+					});
+					 
+					request.done(function( msg ) {
+					  console.log( "Request done: " + msg );
+					});
+					 
+					request.fail(function( jqXHR, textStatus ) {
+					  console.log( "Request failed: " + textStatus );
+					});
+				}
+			}
+		});
+	});
+</script>
